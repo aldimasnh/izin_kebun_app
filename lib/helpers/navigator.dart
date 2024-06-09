@@ -3,6 +3,7 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class NavigationService {
   late GlobalKey<NavigatorState> navigationKey;
+  bool isLoading = false;
 
   static NavigationService instance = NavigationService();
 
@@ -10,9 +11,9 @@ class NavigationService {
     navigationKey = GlobalKey<NavigatorState>();
   }
 
-  navigate(Widget rn) {
+  navigate(String routeName /* , {Map<String, dynamic>? arguments} */) {
     return navigationKey.currentState!
-        .push(MaterialPageRoute(builder: (context) => rn));
+        .pushNamed(routeName /* , arguments: arguments */);
   }
 
   goBack() {
@@ -20,18 +21,32 @@ class NavigationService {
   }
 
   showLoader() {
-    Future.delayed(Duration.zero, () {
-      showDialog(
+    isLoading = true;
+    Future.delayed(
+      Duration.zero,
+      () {
+        showDialog(
           context: navigationKey.currentContext!,
           barrierDismissible: false,
           builder: (BuildContext context) {
             return Center(
               child: LoadingAnimationWidget.staggeredDotsWave(
-                color: const Color(0xFF10b981),
+                color: const Color(0xFF34d399),
                 size: 50,
               ),
             );
-          });
-    });
+          },
+        );
+      },
+    );
+  }
+
+  hideLoader() {
+    if (isLoading) {
+      isLoading = false;
+      if (navigationKey.currentState!.canPop()) {
+        navigationKey.currentState!.pop();
+      }
+    }
   }
 }

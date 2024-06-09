@@ -63,11 +63,11 @@ class _CustomTextFieldState extends State<CustomTextField> {
               color: Color(0xFF16A34A),
               width: 2,
             ),
-            borderRadius: BorderRadius.all(Radius.circular(5)),
+            borderRadius: BorderRadius.all(Radius.circular(10)),
           ),
           enabledBorder: const OutlineInputBorder(
             borderSide: BorderSide(color: Colors.grey),
-            borderRadius: BorderRadius.all(Radius.circular(5)),
+            borderRadius: BorderRadius.all(Radius.circular(10)),
           ),
           suffixIcon: widget.name.toLowerCase() == 'password'
               ? InkWell(

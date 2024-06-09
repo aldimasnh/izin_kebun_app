@@ -1,6 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:izin_kebun_app/src/view/login.dart';
 import 'package:lottie/lottie.dart';
 import 'package:izin_kebun_app/helpers/navigator.dart';
 
@@ -92,7 +91,8 @@ class Welcome extends StatelessWidget {
                           onPressed: () {
                             _navigationService.showLoader();
                             Future.delayed(const Duration(seconds: 1), () {
-                              _navigationService.navigate(Login());
+                              _navigationService.hideLoader();
+                              _navigationService.navigate('/login');
                             });
                           },
                           style: ButtonStyle(
