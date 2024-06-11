@@ -7,6 +7,7 @@ class CustomTextField extends StatefulWidget {
   final bool obscureText;
   final TextCapitalization textCapitalization;
   final TextInputType inputType;
+  final TextInputAction textInputAction;
 
   const CustomTextField({
     super.key,
@@ -16,6 +17,7 @@ class CustomTextField extends StatefulWidget {
     this.obscureText = false,
     this.textCapitalization = TextCapitalization.none,
     required this.inputType,
+    this.textInputAction = TextInputAction.done,
   });
 
   @override
@@ -52,6 +54,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
           height: 2,
           fontSize: 16,
         ),
+        textInputAction: widget.textInputAction, // Pass the TextInputAction
+        onSubmitted: (_) {},
         decoration: InputDecoration(
           prefixIcon: Icon(widget.prefixIcon),
           isDense: true,

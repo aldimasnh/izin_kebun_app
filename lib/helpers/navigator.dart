@@ -11,9 +11,9 @@ class NavigationService {
     navigationKey = GlobalKey<NavigatorState>();
   }
 
-  navigate(String routeName /* , {Map<String, dynamic>? arguments} */) {
+  navigate(String routeName, {Map<String, dynamic>? arguments}) {
     return navigationKey.currentState!
-        .pushNamed(routeName /* , arguments: arguments */);
+        .pushNamed(routeName, arguments: arguments);
   }
 
   goBack() {

@@ -1,5 +1,5 @@
 name: izin_kebun_app
-description: "A new Flutter project."
+description: "A part application of SRS."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
@@ -41,6 +41,10 @@ dependencies:
   provider: ^6.1.2
   shared_preferences: ^2.2.3
   webview_flutter: ^4.8.0
+  flutter_barcode_scanner: ^2.0.0
+  encrypt: ^5.0.0
+  crypto: ^3.0.1
+  connectivity_plus: ^6.0.3
 
 dev_dependencies:
   flutter_test:
@@ -52,6 +56,12 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^3.0.0
+  flutter_launcher_icons: ^0.13.1
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/icon_main.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -66,6 +76,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/animations/welcome_vector.json
+    - assets/animations/warning.json
     - assets/images/logo_cbi.png
   #   - images/a_dot_ham.jpeg
 
