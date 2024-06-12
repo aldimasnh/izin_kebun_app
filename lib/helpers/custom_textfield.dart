@@ -64,7 +64,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
           labelStyle: const TextStyle(color: Colors.grey),
           focusedBorder: const OutlineInputBorder(
             borderSide: BorderSide(
-              color: Color(0xFF16A34A),
+              color: Color(0xFF047857),
               width: 2,
             ),
             borderRadius: BorderRadius.all(Radius.circular(10)),

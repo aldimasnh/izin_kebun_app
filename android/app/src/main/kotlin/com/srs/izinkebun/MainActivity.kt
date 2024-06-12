@@ -1,4 +1,4 @@
-package com.srs.izin_kebun_app
+package com.srs.izinkebun
 
 import io.flutter.embedding.android.FlutterActivity
 

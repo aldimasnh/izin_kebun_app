@@ -7,11 +7,18 @@ final NavigationService _navigationService = NavigationService.instance;
 class CustomDialogWidget extends StatefulWidget {
   final bool confirmation;
   final String message;
+  final Function function;
 
-  const CustomDialogWidget(
-      {super.key,
-      this.confirmation = false,
-      this.message = 'Fitur dalam pengembangan'});
+  const CustomDialogWidget({
+    super.key,
+    this.confirmation = false,
+    this.message = 'Fitur dalam pengembangan',
+    this.function = defaultFunction,
+  });
+
+  static void defaultFunction() {
+    debugPrint("Button 'Ya' is clicked!");
+  }
 
   @override
   // ignore: library_private_types_in_public_api
@@ -40,6 +47,7 @@ class _CustomDialogWidgetState extends State<CustomDialogWidget> {
           CardDialog(
             confirmation: widget.confirmation,
             message: widget.message,
+            function: widget.function,
           ),
         ],
       ),
@@ -50,9 +58,14 @@ class _CustomDialogWidgetState extends State<CustomDialogWidget> {
 class CardDialog extends StatelessWidget {
   final bool confirmation;
   final String message;
+  final Function function;
 
-  const CardDialog(
-      {super.key, required this.confirmation, required this.message});
+  const CardDialog({
+    super.key,
+    required this.confirmation,
+    required this.message,
+    required this.function,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +86,7 @@ class CardDialog extends StatelessWidget {
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(100),
                 border: Border.all(
-                  color: const Color(0xFF16A34A),
+                  color: const Color(0xFF047857),
                   width: 2.5,
                 ),
               ),
@@ -109,7 +122,7 @@ class CardDialog extends StatelessWidget {
               children: [
                 Expanded(
                   child: SizedBox(
-                    height: 50,
+                    height: 55,
                     child: ElevatedButton(
                       style: ButtonStyle(
                         shape: WidgetStateProperty.all<RoundedRectangleBorder>(
@@ -138,7 +151,7 @@ class CardDialog extends StatelessWidget {
                 ),
                 Expanded(
                   child: SizedBox(
-                    height: 50,
+                    height: 55,
                     child: ElevatedButton(
                       style: ButtonStyle(
                         shape: WidgetStateProperty.all<RoundedRectangleBorder>(
@@ -149,9 +162,9 @@ class CardDialog extends StatelessWidget {
                           ),
                         ),
                         backgroundColor:
-                            WidgetStateProperty.all(const Color(0xFF16A34A)),
+                            WidgetStateProperty.all(const Color(0xFF047857)),
                       ),
-                      onPressed: () {},
+                      onPressed: () => function(),
                       child: const Text(
                         'Ya',
                         style: TextStyle(

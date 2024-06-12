@@ -4,13 +4,14 @@ import 'package:webview_flutter/webview_flutter.dart';
 
 class WebViewApp extends StatefulWidget {
   const WebViewApp({super.key});
+
   @override
   State<WebViewApp> createState() => _WebViewScreenState();
 }
 
 class _WebViewScreenState extends State<WebViewApp> {
   final NavigationService _navigationService = NavigationService.instance;
-  late WebViewController controller;
+  late final WebViewController controller;
   var loadingPercentage = 0;
 
   @override
@@ -35,6 +36,10 @@ class _WebViewScreenState extends State<WebViewApp> {
           });
         },
       ))
+      ..addJavaScriptChannel("SnackBar", onMessageReceived: (message) {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text(message.message)));
+      })
       ..loadRequest(
         Uri.parse('https://izin-kebun.srs-ssms.com'),
       );
@@ -45,20 +50,39 @@ class _WebViewScreenState extends State<WebViewApp> {
     return PopScope(
       canPop: false,
       onPopInvoked: (didPop) async {
-        _navigationService.navigate('/login');
+        _navigationService.showLoader();
+        Future.delayed(const Duration(milliseconds: 500), () {
+          _navigationService.hideLoader();
+          _navigationService.navigate('/login');
+        });
       },
       child: Scaffold(
         backgroundColor: Colors.white,
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
             centerTitle: true,
-            title: const Text('Izin Kebun App - WebView'),
-            backgroundColor: Colors.white,
+            title: const Text(
+              'WebView - Izin Kebun App',
+              style: TextStyle(color: Colors.white),
+            ),
+            backgroundColor: const Color(0xFF047857),
+            leading: IconButton(
+              icon: const Icon(Icons.arrow_back_rounded),
+              color: Colors.white,
+              onPressed: () {
+                _navigationService.showLoader();
+                Future.delayed(const Duration(milliseconds: 500), () {
+                  _navigationService.hideLoader();
+                  _navigationService.navigate('/login');
+                });
+              },
+            ),
             actions: [
               Row(
                 children: <Widget>[
                   IconButton(
                     icon: const Icon(Icons.arrow_back_ios),
+                    color: Colors.white,
                     onPressed: () async {
                       final messenger = ScaffoldMessenger.of(context);
                       if (await controller.canGoBack()) {
@@ -79,6 +103,7 @@ class _WebViewScreenState extends State<WebViewApp> {
                   ),
                   IconButton(
                     icon: const Icon(Icons.arrow_forward_ios),
+                    color: Colors.white,
                     onPressed: () async {
                       final messenger = ScaffoldMessenger.of(context);
                       if (await controller.canGoForward()) {
@@ -99,6 +124,7 @@ class _WebViewScreenState extends State<WebViewApp> {
                   ),
                   IconButton(
                     icon: const Icon(Icons.replay),
+                    color: Colors.white,
                     onPressed: () {
                       controller.reload();
                     },
@@ -113,7 +139,7 @@ class _WebViewScreenState extends State<WebViewApp> {
             ),
             loadingPercentage < 100
                 ? LinearProgressIndicator(
-                    color: const Color(0xFF34d399),
+                    color: const Color(0xFF10b981),
                     value: loadingPercentage / 100.0,
                   )
                 : Container()

@@ -85,8 +85,6 @@ class AuthViewModel extends ChangeNotifier {
       statusCode = 1;
     }
 
-    debugPrint('isMatch: $isMatch');
-
     isLoading = false;
     notifyListeners();
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:izin_kebun_app/helpers/qrcode_service.dart';
 import 'package:izin_kebun_app/helpers/sharedPreferences.dart';
 import 'package:izin_kebun_app/src/view/login.dart';
 import 'package:izin_kebun_app/src/view/verification.dart';
@@ -33,7 +34,7 @@ class MyApp extends StatelessWidget {
         title: 'SRS Izin Kebun',
         theme: ThemeData(
           fontFamily: 'Inter',
-          colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF16A34A)),
+          colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF047857)),
           useMaterial3: true,
         ),
         navigatorKey: NavigationService.instance.navigationKey,
@@ -42,7 +43,8 @@ class MyApp extends StatelessWidget {
           '/home': (context) => Welcome(),
           '/login': (context) => const Login(),
           '/webview': (context) => const WebViewApp(),
-          '/verification': (context) => const Verification(),
+          '/verification': (context) => Verification(),
+          '/scanQr': (context) => const ScanQRCode(),
         },
         initialRoute: !isFirstTimeLaunch ? '/home' : '/login',
       ),

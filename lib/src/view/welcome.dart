@@ -41,7 +41,7 @@ class Welcome extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 35,
                           fontWeight: FontWeight.w900,
-                          color: Color(0xFF16A34A),
+                          color: Color(0xFF047857),
                         ),
                         maxLines: 1,
                       ),
@@ -50,7 +50,7 @@ class Welcome extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 35,
                           fontWeight: FontWeight.bold,
-                          color: Color(0xFF16A34A),
+                          color: Color(0xFF047857),
                         ),
                       ),
                       Container(
@@ -105,10 +105,10 @@ class Welcome extends StatelessWidget {
                                 ),
                               ),
                               backgroundColor: WidgetStateProperty.all(
-                                  const Color(0xFF16A34A)),
+                                  const Color(0xFF047857)),
                               elevation: WidgetStateProperty.all(15),
                               shadowColor: WidgetStateProperty.all(
-                                  const Color(0xFF16A34A).withOpacity(0.5)),
+                                  const Color(0xFF047857).withOpacity(0.5)),
                             ),
                             child: const Text(
                               'Masuk',

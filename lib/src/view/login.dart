@@ -1,11 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:izin_kebun_app/helpers/connectivity_service.dart';
 import 'package:izin_kebun_app/helpers/custom_alert_dialog.dart';
 import 'package:izin_kebun_app/helpers/custom_textfield.dart';
-import 'package:izin_kebun_app/helpers/helpers.dart';
 import 'package:izin_kebun_app/helpers/sharedPreferences.dart';
 import 'package:izin_kebun_app/src/model/auth_model.dart';
 import 'package:izin_kebun_app/src/viewmodel/auth_viewmodel.dart';
@@ -22,7 +20,6 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   bool _isConnected = false;
-  String _scanBarcode = '';
   late SharedPreferencesManager _prefsManager;
 
   final ConnectivityService _connectivityService = ConnectivityService();
@@ -56,39 +53,16 @@ class _LoginState extends State<Login> {
     });
   }
 
-  Future<void> _startScanQR() async {
-    String barcodeScanRes;
-    try {
-      barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
-          '#ff6666', 'Cancel', true, ScanMode.QR);
-    } on PlatformException {
-      debugPrint('Failed to get platform version/scan QR.');
-      barcodeScanRes = '';
-    }
-    if (!mounted) return;
-
-    setState(() {
-      _scanBarcode = barcodeScanRes;
-
-      if (_scanBarcode.isNotEmpty) {
-        String decryptedData = Helpers.aesDecrypt(_scanBarcode, 'CBI@2024');
-        if (decryptedData.isNotEmpty) {
-          _navigationService.navigate('/verification', arguments: {
-            'dataQr': decryptedData,
-          });
-        } else {
-          debugPrint('Failed to decrypt data.');
-        }
-      }
-    });
-  }
-
   Future<void> _initializePrefsManager() async {
     _prefsManager = await SharedPreferencesManager.getInstance();
     setState(() {
       _emailUser = _prefsManager.loadValue('email', '');
       _passUser = _prefsManager.loadValue('password', '');
     });
+
+    if (_emailUser.isNotEmpty) {
+      _emailController.text = _emailUser;
+    }
   }
 
   @override
@@ -101,7 +75,16 @@ class _LoginState extends State<Login> {
     return PopScope(
       canPop: false,
       onPopInvoked: (didPop) async {
-        SystemNavigator.pop();
+        showDialog(
+          context: context,
+          builder: (context) => CustomDialogWidget(
+            confirmation: true,
+            message: 'Apakah anda yakin ingin keluar dari aplikasi?',
+            function: () {
+              SystemNavigator.pop();
+            },
+          ),
+        );
       },
       child: Scaffold(
         backgroundColor: Colors.white,
@@ -143,7 +126,7 @@ class _LoginState extends State<Login> {
                                 style: TextStyle(
                                   fontSize: 40,
                                   fontWeight: FontWeight.bold,
-                                  color: Color(0xFF16A34A),
+                                  color: Color(0xFF047857),
                                 ),
                               ),
                             ),
@@ -223,7 +206,7 @@ class _LoginState extends State<Login> {
                                       style: TextStyle(
                                         fontSize: 15,
                                         fontWeight: FontWeight.bold,
-                                        color: Color(0xFF16A34A),
+                                        color: Color(0xFF047857),
                                       ),
                                     ),
                                   ),
@@ -254,7 +237,8 @@ class _LoginState extends State<Login> {
                                                       color: Colors.black,
                                                       width: 1.5)),
                                             ),
-                                            onPressed: () => _startScanQR(),
+                                            onPressed: () => _navigationService
+                                                .navigate('/scanQr'),
                                             child: const Text(
                                               'Verifikasi',
                                               style: TextStyle(
@@ -333,12 +317,12 @@ class _LoginState extends State<Login> {
                                               ),
                                               backgroundColor:
                                                   WidgetStateProperty.all(
-                                                      const Color(0xFF16A34A)),
+                                                      const Color(0xFF047857)),
                                               elevation:
                                                   WidgetStateProperty.all(15),
                                               shadowColor:
                                                   WidgetStateProperty.all(
-                                                      const Color(0xFF16A34A)
+                                                      const Color(0xFF047857)
                                                           .withOpacity(0.5)),
                                             ),
                                             child: const Text(
