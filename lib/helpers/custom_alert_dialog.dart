@@ -16,9 +16,7 @@ class CustomDialogWidget extends StatefulWidget {
     this.function = defaultFunction,
   });
 
-  static void defaultFunction() {
-    debugPrint("Button 'Ya' is clicked!");
-  }
+  static void defaultFunction() {}
 
   @override
   // ignore: library_private_types_in_public_api

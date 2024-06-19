@@ -78,7 +78,7 @@ class Verification extends StatelessWidget {
                     child: AutoSizeText(
                       dataQrText.isNotEmpty && dataQrText.containsKey("0")
                           ? dataQrText['0']
-                          : "",
+                          : "-",
                       style: const TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.normal,
@@ -116,9 +116,9 @@ class Verification extends StatelessWidget {
                   child: Align(
                     alignment: Alignment.centerLeft,
                     child: AutoSizeText(
-                      dataQrText.isNotEmpty && dataQrText.containsKey("1")
-                          ? dataQrText['1']
-                          : "",
+                      dataQrText.isNotEmpty && dataQrText.containsKey("10")
+                          ? dataQrText['10']
+                          : "-",
                       style: const TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.normal,
@@ -156,9 +156,9 @@ class Verification extends StatelessWidget {
                   child: Align(
                     alignment: Alignment.centerLeft,
                     child: AutoSizeText(
-                      dataQrText.isNotEmpty && dataQrText.containsKey("10")
-                          ? dataQrText['10']
-                          : "",
+                      dataQrText.isNotEmpty && dataQrText.containsKey("9")
+                          ? dataQrText['9']
+                          : "-",
                       style: const TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.normal,
@@ -196,9 +196,9 @@ class Verification extends StatelessWidget {
                   child: Align(
                     alignment: Alignment.centerLeft,
                     child: AutoSizeText(
-                      dataQrText.isNotEmpty && dataQrText.containsKey("6")
-                          ? dataQrText['6']
-                          : "",
+                      dataQrText.isNotEmpty && dataQrText.containsKey("5")
+                          ? dataQrText['5']
+                          : "-",
                       style: const TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.normal,
@@ -240,9 +240,9 @@ class Verification extends StatelessWidget {
                     child: Align(
                       alignment: Alignment.topLeft,
                       child: AutoSizeText(
-                        dataQrText.isNotEmpty && dataQrText.containsKey("7")
-                            ? dataQrText['7']
-                            : "",
+                        dataQrText.isNotEmpty && dataQrText.containsKey("6")
+                            ? dataQrText['6']
+                            : "-",
                         style: const TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.normal,
@@ -314,9 +314,9 @@ class Verification extends StatelessWidget {
                               alignment: Alignment.center,
                               child: AutoSizeText(
                                 dataQrText.isNotEmpty &&
-                                        dataQrText.containsKey("2")
-                                    ? dataQrText['2']
-                                    : "",
+                                        dataQrText.containsKey("1")
+                                    ? dataQrText['1']
+                                    : "-",
                                 style: const TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.normal,
@@ -342,9 +342,9 @@ class Verification extends StatelessWidget {
                               alignment: Alignment.center,
                               child: AutoSizeText(
                                 dataQrText.isNotEmpty &&
-                                        dataQrText.containsKey("3")
-                                    ? dataQrText['3']
-                                    : "",
+                                        dataQrText.containsKey("2")
+                                    ? dataQrText['2']
+                                    : "-",
                                 style: const TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.normal,
@@ -420,9 +420,9 @@ class Verification extends StatelessWidget {
                               alignment: Alignment.center,
                               child: AutoSizeText(
                                 dataQrText.isNotEmpty &&
-                                        dataQrText.containsKey("4")
-                                    ? dataQrText['4']
-                                    : "",
+                                        dataQrText.containsKey("3")
+                                    ? dataQrText['3']
+                                    : "-",
                                 style: const TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.normal,
@@ -448,9 +448,9 @@ class Verification extends StatelessWidget {
                               alignment: Alignment.center,
                               child: AutoSizeText(
                                 dataQrText.isNotEmpty &&
-                                        dataQrText.containsKey("5")
-                                    ? dataQrText['5']
-                                    : "",
+                                        dataQrText.containsKey("4")
+                                    ? dataQrText['4']
+                                    : "-",
                                 style: const TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.normal,
@@ -493,9 +493,9 @@ class Verification extends StatelessWidget {
                   child: Align(
                     alignment: Alignment.centerLeft,
                     child: AutoSizeText(
-                      dataQrText.isNotEmpty && dataQrText.containsKey("8")
-                          ? 'Atasan 1 - ${dataQrText['8']}'
-                          : "",
+                      dataQrText.isNotEmpty && dataQrText.containsKey("7")
+                          ? 'Atasan 1 - ${dataQrText['7']}'
+                          : "-",
                       style: const TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.normal,
@@ -518,9 +518,9 @@ class Verification extends StatelessWidget {
                   child: Align(
                     alignment: Alignment.centerLeft,
                     child: AutoSizeText(
-                      dataQrText.isNotEmpty && dataQrText.containsKey("9")
-                          ? 'Atasan 2 - ${dataQrText['9']}'
-                          : "",
+                      dataQrText.isNotEmpty && dataQrText.containsKey("8")
+                          ? 'Atasan 2 - ${dataQrText['8']}'
+                          : "-",
                       style: const TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.normal,

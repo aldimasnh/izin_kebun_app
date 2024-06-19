@@ -9,6 +9,7 @@ import 'package:izin_kebun_app/src/model/auth_model.dart';
 import 'package:izin_kebun_app/src/viewmodel/auth_viewmodel.dart';
 import 'package:provider/provider.dart';
 import 'package:izin_kebun_app/helpers/navigator.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -36,6 +37,12 @@ class _LoginState extends State<Login> {
     _initializePrefsManager();
     _checkInitialConnectivity();
     _listenToConnectivityChanges();
+  }
+
+  Future<void> _launchInBrowserView(Uri url) async {
+    if (!await launchUrl(url, mode: LaunchMode.inAppBrowserView)) {
+      throw Exception('Could not launch $url');
+    }
   }
 
   Future<void> _checkInitialConnectivity() async {
@@ -97,8 +104,17 @@ class _LoginState extends State<Login> {
               } else {
                 _navigationService.hideLoader();
                 if (viewModel.statusCode == 1) {
-                  _navigationService.navigate('/webview');
+                  _launchInBrowserView(Uri.parse(
+                      'https://izin-kebun.srs-ssms.com/api/authUser?email=${_emailController.text}&password=${_passController.text}'));
+                } else if (viewModel.statusCode == 0) {
+                  showDialog(
+                    context: context,
+                    builder: (context) => const CustomDialogWidget(
+                      message: 'Email atau password salah',
+                    ),
+                  );
                 }
+                viewModel.statusCode = 99;
               }
             });
 
@@ -260,13 +276,15 @@ class _LoginState extends State<Login> {
                                                       .text.isEmpty ||
                                                   _passController
                                                       .text.isEmpty) {
-                                                ScaffoldMessenger.of(context)
-                                                    .showSnackBar(
-                                                  const SnackBar(
-                                                      content: Text(
-                                                          'Email / Password tidak boleh kosong.')),
+                                                showDialog(
+                                                  context: context,
+                                                  builder: (context) =>
+                                                      const CustomDialogWidget(
+                                                    message:
+                                                        'Email atau password tidak boleh kosong',
+                                                  ),
                                                 );
-                                              } else {
+                                              } else if (_isConnected) {
                                                 if (_emailUser.isNotEmpty &&
                                                     _passUser.isNotEmpty) {
                                                   Map<String, dynamic>
@@ -285,26 +303,24 @@ class _LoginState extends State<Login> {
                                                                   .text),
                                                       dataPref);
                                                 } else {
-                                                  if (_isConnected) {
-                                                    viewModel.onlineAuth(
-                                                        AuthModel(
-                                                            email:
-                                                                _emailController
-                                                                    .text,
-                                                            password:
-                                                                _passController
-                                                                    .text));
-                                                  } else {
-                                                    showDialog(
-                                                      context: context,
-                                                      builder: (context) =>
-                                                          const CustomDialogWidget(
-                                                        message:
-                                                            'Mohon periksa koneksi internet',
-                                                      ),
-                                                    );
-                                                  }
+                                                  viewModel.onlineAuth(
+                                                      AuthModel(
+                                                          email:
+                                                              _emailController
+                                                                  .text,
+                                                          password:
+                                                              _passController
+                                                                  .text));
                                                 }
+                                              } else {
+                                                showDialog(
+                                                  context: context,
+                                                  builder: (context) =>
+                                                      const CustomDialogWidget(
+                                                    message:
+                                                        'Mohon periksa koneksi internet',
+                                                  ),
+                                                );
                                               }
                                             },
                                             style: ButtonStyle(

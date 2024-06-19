@@ -2,7 +2,6 @@
 import 'dart:convert';
 import 'package:encrypt/encrypt.dart' as encrypt;
 import 'package:crypto/crypto.dart' as crypto;
-import 'package:flutter/material.dart';
 
 class Helpers {
   static String aesDecrypt(String base64Data, String password) {
@@ -23,7 +22,6 @@ class Helpers {
 
       return decryptedData;
     } catch (e) {
-      debugPrint('Error decrypting data: $e');
       return decryptedData;
     }
   }

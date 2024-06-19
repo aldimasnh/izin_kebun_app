@@ -3,7 +3,6 @@ import 'package:izin_kebun_app/helpers/qrcode_service.dart';
 import 'package:izin_kebun_app/helpers/sharedPreferences.dart';
 import 'package:izin_kebun_app/src/view/login.dart';
 import 'package:izin_kebun_app/src/view/verification.dart';
-import 'package:izin_kebun_app/src/view/webview.dart';
 import 'package:izin_kebun_app/src/view/welcome.dart';
 import 'package:izin_kebun_app/helpers/navigator.dart';
 import 'package:izin_kebun_app/src/viewmodel/auth_viewmodel.dart';
@@ -32,6 +31,7 @@ class MyApp extends StatelessWidget {
       providers: [ChangeNotifierProvider(create: (context) => AuthViewModel())],
       child: MaterialApp(
         title: 'SRS Izin Kebun',
+        themeMode: ThemeMode.light,
         theme: ThemeData(
           fontFamily: 'Inter',
           colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF047857)),
@@ -42,7 +42,6 @@ class MyApp extends StatelessWidget {
         routes: {
           '/home': (context) => Welcome(),
           '/login': (context) => const Login(),
-          '/webview': (context) => const WebViewApp(),
           '/verification': (context) => Verification(),
           '/scanQr': (context) => const ScanQRCode(),
         },

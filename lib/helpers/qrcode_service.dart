@@ -55,10 +55,8 @@ class _ScanQRCodeState extends State<ScanQRCode>
   }
 
   Widget _buildQrView(BuildContext context) {
-    var scanArea = (MediaQuery.of(context).size.width < 400 ||
-            MediaQuery.of(context).size.height < 400)
-        ? 150.0
-        : 300.0;
+    var scanArea = calculateScanAreaSize(
+        MediaQuery.of(context).size.width, MediaQuery.of(context).size.height);
 
     return Stack(
       children: [
@@ -173,6 +171,18 @@ class _ScanQRCodeState extends State<ScanQRCode>
         ),
       ],
     );
+  }
+
+  double calculateScanAreaSize(double screenWidth, double screenHeight) {
+    double scanAreaSize = 300.0;
+
+    if (screenWidth < screenHeight) {
+      scanAreaSize = screenWidth * 0.8;
+    } else {
+      scanAreaSize = screenHeight * 0.8;
+    }
+
+    return scanAreaSize < 300.0 ? scanAreaSize : 300.0;
   }
 
   void _onQRViewCreated(QRViewController controller) {

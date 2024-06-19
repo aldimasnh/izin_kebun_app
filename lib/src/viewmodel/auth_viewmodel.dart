@@ -20,7 +20,6 @@ class AuthViewModel extends ChangeNotifier {
     isLoading = true;
     notifyListeners();
 
-    debugPrint('user: ${user.toJson()}');
     try {
       final response = await http.post(
         Uri.parse(url),
@@ -31,7 +30,6 @@ class AuthViewModel extends ChangeNotifier {
       );
 
       isLoading = false;
-
       if (response.statusCode == 200) {
         final jsonData = jsonDecode(response.body);
         int success = jsonData['success'];
@@ -55,6 +53,7 @@ class AuthViewModel extends ChangeNotifier {
         debugPrint('success: $success');
         // Parse jsonData and handle success/error according to your API response
       } else {
+        statusCode = 0;
         errorMessage =
             'Failed to authenticate. Status code: ${response.statusCode}';
       }
@@ -62,7 +61,6 @@ class AuthViewModel extends ChangeNotifier {
       isLoading = false;
       errorMessage = 'Error occurred: $e';
     }
-    debugPrint('error: $errorMessage');
 
     notifyListeners();
   }
@@ -79,13 +77,14 @@ class AuthViewModel extends ChangeNotifier {
     bool isMatch = (userInput['email'] == dataPref['email'] &&
         userInput['password'] == dataPref['password']);
 
+    isLoading = false;
     if (!isMatch) {
+      statusCode = 0;
       errorMessage = 'Mohon masukkan data dengan benar.';
     } else {
       statusCode = 1;
     }
 
-    isLoading = false;
     notifyListeners();
   }
 }
