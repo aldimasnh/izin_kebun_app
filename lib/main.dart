@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [ChangeNotifierProvider(create: (context) => AuthViewModel())],
       child: MaterialApp(
-        title: 'SRS Izin Kebun',
+        title: 'ePermit SRS',
         themeMode: ThemeMode.light,
         theme: ThemeData(
           fontFamily: 'Inter',
