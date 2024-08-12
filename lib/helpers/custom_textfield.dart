@@ -42,7 +42,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         enabled: true,
         controller: widget.controller,
         textCapitalization: widget.textCapitalization,
-        maxLength: 32,
+        maxLength: 50,
         maxLines: 1,
         obscureText: widget.name.toLowerCase() == 'password'
             ? _isHidden

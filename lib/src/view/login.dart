@@ -69,6 +69,7 @@ class _LoginState extends State<Login> {
 
     if (_emailUser.isNotEmpty) {
       _emailController.text = _emailUser;
+      _passController.text = _passUser;
     }
   }
 
@@ -285,25 +286,7 @@ class _LoginState extends State<Login> {
                                                   ),
                                                 );
                                               } else if (_isConnected) {
-                                                if (_emailUser.isNotEmpty &&
-                                                    _passUser.isNotEmpty) {
-                                                  Map<String, dynamic>
-                                                      dataPref = {
-                                                    'email': _emailUser,
-                                                    'password': _passUser,
-                                                  };
-
-                                                  viewModel.offlineAuth(
-                                                      AuthModel(
-                                                          email:
-                                                              _emailController
-                                                                  .text,
-                                                          password:
-                                                              _passController
-                                                                  .text),
-                                                      dataPref);
-                                                } else {
-                                                  viewModel.onlineAuth(
+                                                viewModel.onlineAuth(
                                                       AuthModel(
                                                           email:
                                                               _emailController
@@ -311,7 +294,6 @@ class _LoginState extends State<Login> {
                                                           password:
                                                               _passController
                                                                   .text));
-                                                }
                                               } else {
                                                 showDialog(
                                                   context: context,

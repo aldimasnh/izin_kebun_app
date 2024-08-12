@@ -64,27 +64,4 @@ class AuthViewModel extends ChangeNotifier {
 
     notifyListeners();
   }
-
-  Future<void> offlineAuth(
-      AuthModel user, Map<String, dynamic> dataPref) async {
-    final userInput = user.toJson();
-
-    statusCode = 99;
-    errorMessage = '';
-    isLoading = true;
-    notifyListeners();
-
-    bool isMatch = (userInput['email'] == dataPref['email'] &&
-        userInput['password'] == dataPref['password']);
-
-    isLoading = false;
-    if (!isMatch) {
-      statusCode = 0;
-      errorMessage = 'Mohon masukkan data dengan benar.';
-    } else {
-      statusCode = 1;
-    }
-
-    notifyListeners();
-  }
 }
